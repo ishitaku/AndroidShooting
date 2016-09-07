@@ -6,16 +6,23 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private CustomSurfaceView mSurfaceView = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ((TextView) findViewById(R.id.jni_msgView)).setText(getMsgFromJni());
+
+        mSurfaceView = new CustomSurfaceView(this);
+        setContentView(mSurfaceView);
+        //setContentView(R.layout.activity_main);
+
+        //((TextView) findViewById(R.id.jni_msgView)).setText(getMsgFromJni());
     }
 
+    /*
     static {
         System.loadLibrary("jnitest");
     }
     public native String getMsgFromJni();
-
+    */
 }
