@@ -1,5 +1,8 @@
 package jp.study.ndktest;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,26 +17,22 @@ public class CustomSurfaceHolder implements SurfaceHolder.Callback, Runnable {
     private Thread mThread = null;
     private SurfaceHolder mSurfaceHolder = null;
     private boolean mLoop = true;
-
-    private float dx = 10, dy = 10;
-    private float width, height;
-    private int   circle_x, circle_y;
-
+    private Bitmap mBitmap = null;
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+
         //
         mSurfaceHolder = holder;
         //スレッドを生成
         mThread = new Thread(this);
         //スレッドを開始
         mThread.start();
+
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        this.width = width;
-        this.height = height;
 
     }
 
@@ -46,22 +45,12 @@ public class CustomSurfaceHolder implements SurfaceHolder.Callback, Runnable {
 
     @Override
     public void run() {
+
         while (mLoop) {
-            //丸の表示位置を動かす
-            if( circle_x < 0 || circle_x > this.width ){
-                dx = -dx;
-            }
-            if( circle_y < 0 || circle_y > this.height ){
-                dy = -dy;
-            }
-            circle_x += dx;
-            circle_y += dy;
+
             //描画処理を開始
             Canvas canvas = mSurfaceHolder.lockCanvas();
-            canvas.drawColor(0, PorterDuff.Mode.CLEAR );
-            Paint paint = new Paint();
-            paint.setColor(Color.RED);
-            canvas.drawCircle( circle_x, circle_y, 50, paint);
+            canvas.drawBitmap(mBitmap, 0, 0, new Paint());
             //描画処理を終了
             mSurfaceHolder.unlockCanvasAndPost(canvas);
         }

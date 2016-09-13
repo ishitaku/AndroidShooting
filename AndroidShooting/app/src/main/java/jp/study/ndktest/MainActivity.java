@@ -19,10 +19,10 @@ public class MainActivity extends AppCompatActivity {
         //((TextView) findViewById(R.id.jni_msgView)).setText(getMsgFromJni());
     }
 
-    /*
+
     static {
         System.loadLibrary("jnitest");
     }
     public native String getMsgFromJni();
-    */
+
 }
