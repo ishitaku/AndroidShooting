@@ -11,6 +11,8 @@ import android.graphics.Canvas;
  */
 public class GamePlayCtrl {
 
+
+
     /**
      * コンストラクタ
      */
