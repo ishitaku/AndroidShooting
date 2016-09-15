@@ -4,6 +4,8 @@ package jp.study.ndktest;
  * Created by ishitaku on 2016/09/14.
  */
 
+import android.graphics.Canvas;
+
 /**
  * ゲームプレイコントロール
  */
@@ -27,6 +29,12 @@ public class GamePlayCtrl {
      * 更新処理
      */
     public void gamePlayUpdate() {
+
+    }
+    /**
+     * 描画処理
+     */
+    public void gamePlayDraw(Canvas canvas) {
 
     }
 

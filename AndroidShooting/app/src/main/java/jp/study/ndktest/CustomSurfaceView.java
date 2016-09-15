@@ -19,6 +19,8 @@ public class CustomSurfaceView extends SurfaceView implements SurfaceHolder.Call
     private SurfaceHolder mSurfaceHolder = null;
     private boolean mLoop = true;
     private Bitmap mBitmap = null;
+    private long t1 = 0, t2 = 0; // スリープ用変数
+
 
     CustomSurfaceView(Context context) {
         super(context);
@@ -56,12 +58,28 @@ public class CustomSurfaceView extends SurfaceView implements SurfaceHolder.Call
     public void run() {
 
         while (mLoop) {
+            t1 = System.currentTimeMillis();
 
             //描画処理を開始
             Canvas canvas = mSurfaceHolder.lockCanvas();
+            //更新
+
             canvas.drawBitmap(mBitmap, 0, 0, new Paint());
+
+
             //描画処理を終了
             mSurfaceHolder.unlockCanvasAndPost(canvas);
+
+            // スリープ
+            t2 = System.currentTimeMillis();
+            if (t2 - t1 < 16) { // 1000 / 60 = 16.6666
+                try {
+                    Thread.sleep(16 - (t2 - t1));
+                } catch (InterruptedException e) {
+
+                }
+            }
+
         }
     }
 

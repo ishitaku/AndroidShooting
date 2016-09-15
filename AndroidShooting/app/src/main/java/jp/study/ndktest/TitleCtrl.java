@@ -4,6 +4,8 @@ package jp.study.ndktest;
  * Created by ishitaku on 2016/09/14.
  */
 
+import android.graphics.Canvas;
+
 /**
  * タイトルコントロール
  */
@@ -27,6 +29,13 @@ public class TitleCtrl {
      * 更新処理
      */
     public void titleUpdate() {
+
+    }
+
+    /**
+     * 描画処理
+     */
+    public void titleDraw(Canvas canvas) {
 
     }
 
