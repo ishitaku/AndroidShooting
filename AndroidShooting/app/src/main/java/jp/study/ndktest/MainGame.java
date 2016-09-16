@@ -1,11 +1,15 @@
 package jp.study.ndktest;
 
+import android.content.Context;
 import android.graphics.Canvas;
 
 /**
  * Created by ishitaku on 2016/09/14.
  */
 public class MainGame {
+    //コンテキスト
+    Context mContext = null;
+
     //ゲーム状態の列挙型
     private enum GameState {
         TITLE,
@@ -14,7 +18,6 @@ public class MainGame {
     }
     //ステート
     private GameState mGameState = GameState.TITLE;
-
     //タイトルコントロール
     private TitleCtrl mTitleCtrl = null;
     //ゲームプレイコントロール
@@ -22,21 +25,28 @@ public class MainGame {
     /**
      * コンストラクタ
      */
-    MainGame() {
-        mGameState = GameState.TITLE;
+    MainGame(Context context) {
+        //mGameState = GameState.TITLE;
+        mGameState = GameState.GAMEPLAY;
+        mContext = context;
     }
 
     public void gameUpdate() {
         switch (mGameState) {
             case TITLE:
                 if(mTitleCtrl == null) {
-                    mTitleCtrl = new TitleCtrl();
+                    mTitleCtrl = new TitleCtrl(mContext);
                 }
                 break;
             case GAMEPLAY:
                 if(mGamePlayCtrl == null) {
-                    mGamePlayCtrl = new GamePlayCtrl();
+                    mGamePlayCtrl = new GamePlayCtrl(mContext);
                 }
+                //更新処理
+                mGamePlayCtrl.gamePlayUpdate();
+                break;
+            default:
+                break;
         }
     }
 

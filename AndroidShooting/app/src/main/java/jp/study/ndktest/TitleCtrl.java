@@ -4,18 +4,21 @@ package jp.study.ndktest;
  * Created by ishitaku on 2016/09/14.
  */
 
+import android.content.Context;
 import android.graphics.Canvas;
 
 /**
  * タイトルコントロール
  */
 public class TitleCtrl {
+    //コンテキスト
+    Context mContext = null;
 
     /**
      * コンストラクタ
      */
-    TitleCtrl() {
-
+    TitleCtrl(Context context) {
+        mContext = context;
     }
 
     /**

@@ -21,12 +21,15 @@ public class CustomSurfaceView extends SurfaceView implements SurfaceHolder.Call
     private Bitmap mBitmap = null;
     private long t1 = 0, t2 = 0; // スリープ用変数
 
+    private MainGame mMainGame = null;
 
     CustomSurfaceView(Context context) {
         super(context);
         mSurfaceHolder = getHolder();
         SurfaceHolder surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
+        //ゲーム生成
+        mMainGame = new MainGame(context);
     }
 
     CustomSurfaceView(Context context, AttributeSet attr) {
@@ -60,12 +63,12 @@ public class CustomSurfaceView extends SurfaceView implements SurfaceHolder.Call
         while (mLoop) {
             t1 = System.currentTimeMillis();
 
+            //更新
+            mMainGame.gameUpdate();
             //描画処理を開始
             Canvas canvas = mSurfaceHolder.lockCanvas();
-            //更新
-
-            canvas.drawBitmap(mBitmap, 0, 0, new Paint());
-
+            //canvas.drawBitmap(mBitmap, 0, 0, new Paint());
+            mMainGame.gameDraw(canvas);
 
             //描画処理を終了
             mSurfaceHolder.unlockCanvasAndPost(canvas);
