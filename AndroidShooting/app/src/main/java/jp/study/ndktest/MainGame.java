@@ -31,7 +31,7 @@ public class MainGame {
         mContext = context;
     }
 
-    public void gameUpdate() {
+    public void gameUpdate(int inputx, int inputy) {
         switch (mGameState) {
             case TITLE:
                 if(mTitleCtrl == null) {
@@ -43,7 +43,7 @@ public class MainGame {
                     mGamePlayCtrl = new GamePlayCtrl(mContext);
                 }
                 //更新処理
-                mGamePlayCtrl.gamePlayUpdate();
+                mGamePlayCtrl.gamePlayUpdate(inputx, inputy);
                 break;
             default:
                 break;

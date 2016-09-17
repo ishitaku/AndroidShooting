@@ -35,14 +35,15 @@ public class GamePlayCtrl {
     /**
      * 更新処理
      */
-    public void gamePlayUpdate() {
-
+    public void gamePlayUpdate(int inputx, int inputy) {
+        mStageManager.stageManagerUpdate(inputx, inputy);
     }
     /**
      * 描画処理
      */
     public void gamePlayDraw(Canvas canvas) {
         mStageManager.stageManagerDraw(canvas);
+
     }
 
     /**
