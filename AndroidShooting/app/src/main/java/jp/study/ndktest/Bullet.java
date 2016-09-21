@@ -1,9 +1,5 @@
 package jp.study.ndktest;
 
-/**
- * Created by ishitaku on 2016/09/15.
- */
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,12 +7,12 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 /**
- * プレイヤークラス
+ * Created by ishitaku on 2016/09/21.
  */
-public class Player {
+public class Bullet {
     //コンテキスト
     Context mContext = null;
-    private Bitmap mBitmapPlayer = null;
+    private Bitmap mBitmapBullet = null;
     private float mX = 0.0f;    //x座標
     private float mY = 0.0f;    //y座標
     private float mWidth = 0.0f;    //横幅
@@ -28,16 +24,18 @@ public class Player {
      * コンストラクタ
      * @param context
      */
-    Player(Context context) {
+    Bullet(Context context, float x, float y) {
         mContext = context;
-        playerInit();
+        mX = x;
+        mY = y;
+        bulletInit();
     }
 
     /**
      * 初期化処理
      */
-    private void playerInit() {
-        mBitmapPlayer = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.player);
+    private void bulletInit() {
+        mBitmapBullet = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.bullet);
         //高さを設定
         VIEW_HEIGHT = mContext.getResources().getInteger(R.integer.view_height);
         //幅を設定
@@ -49,29 +47,14 @@ public class Player {
     /**
      * 更新
      */
-    public void playerUpdate (int inputx, int inputy) {
-        mX += inputx;
-        mY += inputy;
-        if(mX + mWidth > VIEW_WIDTH) {
-            mX = VIEW_WIDTH - mWidth;
-        }
-        if(mX < 0) {
-            mX = 0;
-        }
-        if(mY + mHeight > VIEW_HEIGHT){
-            mY = VIEW_HEIGHT - mHeight;
-        }
-        if(mY < 0) {
-            mY = 0;
-        }
+    public void bulletUpdate () {
 
     }
 
     /**
      * 描画
      */
-    public void playerDraw(Canvas canvas) {
-        canvas.drawBitmap(mBitmapPlayer, mX, mY, new Paint());
+    public void bulletDraw(Canvas canvas) {
+        canvas.drawBitmap(mBitmapBullet, mX, mY, new Paint());
     }
-
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="view_width">720</integer>
+    <integer name="view_height">1280</integer>
+    <integer name="player_width">128</integer>
+    <integer name="player_height">128</integer>
+</resources>
