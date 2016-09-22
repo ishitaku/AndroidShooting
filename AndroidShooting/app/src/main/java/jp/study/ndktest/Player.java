@@ -10,6 +10,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * プレイヤークラス
  */
@@ -43,26 +46,27 @@ public class Player {
         //幅を設定
         VIEW_WIDTH = mContext.getResources().getInteger(R.integer.view_width);
         mWidth = mContext.getResources().getInteger(R.integer.player_width);
-        mHeight = mContext.getResources().getInteger(R.integer.view_height);;
+        mHeight = mContext.getResources().getInteger(R.integer.player_height);
+
     }
 
     /**
      * 更新
      */
-    public void playerUpdate (int inputx, int inputy) {
+    public void playerUpdate (int inputx, int inputy, boolean ontouch) {
         mX += inputx;
         mY += inputy;
-        if(mX + mWidth > VIEW_WIDTH) {
-            mX = VIEW_WIDTH - mWidth;
+        if(mX + mWidth/2 > VIEW_WIDTH) {
+            mX = VIEW_WIDTH - mWidth/2;
         }
-        if(mX < 0) {
-            mX = 0;
+        if(mX - mWidth/2 < 0) {
+            mX = mWidth/2;
         }
-        if(mY + mHeight > VIEW_HEIGHT){
-            mY = VIEW_HEIGHT - mHeight;
+        if(mY + mHeight/2 > VIEW_HEIGHT){
+            mY = VIEW_HEIGHT - mHeight/2;
         }
-        if(mY < 0) {
-            mY = 0;
+        if(mY - mHeight/2 < 0) {
+            mY = mHeight / 2;
         }
 
     }
@@ -71,7 +75,21 @@ public class Player {
      * 描画
      */
     public void playerDraw(Canvas canvas) {
-        canvas.drawBitmap(mBitmapPlayer, mX, mY, new Paint());
+        canvas.drawBitmap(mBitmapPlayer, mX - mWidth/2, mY - mHeight/2, new Paint());
+    }
+
+    /**
+     * x座標の取得
+     */
+    public float getX() {
+        return mX;
+    }
+
+    /**
+     * x座標の取得
+     */
+    public float getY() {
+        return mY;
     }
 
 }

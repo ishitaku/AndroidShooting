@@ -34,6 +34,7 @@ public class CustomSurfaceView extends SurfaceView implements SurfaceHolder.Call
     private int mOldTouchY = 0; //前回タッチY
     private int mMoveX = 0;     //移動量X
     private int mMoveY = 0;     //移動量Y
+    private boolean mOnTouch = false;
 
     //ゲームクラス
     private MainGame mMainGame = null;
@@ -85,7 +86,7 @@ public class CustomSurfaceView extends SurfaceView implements SurfaceHolder.Call
             t1 = System.currentTimeMillis();
 
             //更新
-            mMainGame.gameUpdate(mMoveX, mMoveY);
+            mMainGame.gameUpdate(mMoveX, mMoveY, mOnTouch);
             //描画処理を開始
             Canvas canvas = mSurfaceHolder.lockCanvas();
             canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
@@ -125,18 +126,32 @@ public class CustomSurfaceView extends SurfaceView implements SurfaceHolder.Call
         int x = (int) event.getRawX();
         int y = (int) event.getRawY();
         switch (event.getAction()) {
+            //タッチ時
+            case MotionEvent.ACTION_DOWN:
+                mOnTouch = true;
+                break;
+            //移動
             case MotionEvent.ACTION_MOVE:
                 mMoveX = x - mOldTouchX;
                 mMoveY = y - mOldTouchY;
+                break;
+            //離したとき
+            case MotionEvent.ACTION_UP:
+                mOnTouch = false;
+                //移動量をリセット
+                mMoveX = 0;
+                mMoveY = 0;
                 break;
             default:
                 //移動量をリセット
                 mMoveX = 0;
                 mMoveY = 0;
+                //タッチをリセット
+                //mOnTouch = false;
                 break;
         }
-        Log.d("MoveX", ""+mMoveX);
-        Log.d("MoveY", ""+mMoveY);
+        //Log.d("MoveX", ""+mMoveX);
+        //Log.d("MoveY", ""+mMoveY);
         // 今回のタッチ位置を保持
         mOldTouchX = x;
         mOldTouchY = y;

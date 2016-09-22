@@ -35,8 +35,8 @@ public class GamePlayCtrl {
     /**
      * 更新処理
      */
-    public void gamePlayUpdate(int inputx, int inputy) {
-        mStageManager.stageManagerUpdate(inputx, inputy);
+    public void gamePlayUpdate(int inputx, int inputy, boolean ontouch) {
+        mStageManager.stageManagerUpdate(inputx, inputy, ontouch);
     }
     /**
      * 描画処理

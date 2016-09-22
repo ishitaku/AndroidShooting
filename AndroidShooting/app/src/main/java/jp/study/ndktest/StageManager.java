@@ -34,8 +34,8 @@ public class StageManager {
     /**
      * 更新
      */
-    public void stageManagerUpdate(int inputx, int inputy) {
-        mStage.stageUpdate(inputx, inputy);
+    public void stageManagerUpdate(int inputx, int inputy, boolean ontouch) {
+        mStage.stageUpdate(inputx, inputy, ontouch);
     }
 
     /**

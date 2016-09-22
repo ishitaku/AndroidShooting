@@ -19,6 +19,7 @@ public class Bullet {
     private float mHeight = 0.0f;   //高さ
     private int VIEW_HEIGHT = 0;
     private int VIEW_WIDTH = 0;
+    private float mDy = -30.0f;
 
     /**
      * コンストラクタ
@@ -40,21 +41,37 @@ public class Bullet {
         VIEW_HEIGHT = mContext.getResources().getInteger(R.integer.view_height);
         //幅を設定
         VIEW_WIDTH = mContext.getResources().getInteger(R.integer.view_width);
-        mWidth = mContext.getResources().getInteger(R.integer.player_width);
-        mHeight = mContext.getResources().getInteger(R.integer.view_height);;
+        mWidth = mContext.getResources().getInteger(R.integer.bullet_width);
+        mHeight = mContext.getResources().getInteger(R.integer.bullet_height);
     }
 
     /**
      * 更新
      */
     public void bulletUpdate () {
-
+        mY += mDy;
     }
 
     /**
      * 描画
      */
     public void bulletDraw(Canvas canvas) {
-        canvas.drawBitmap(mBitmapBullet, mX, mY, new Paint());
+        canvas.drawBitmap(mBitmapBullet, mX - mWidth/2, mY - mHeight/2, new Paint());
     }
+
+    /**
+     * 解放
+     */
+    public void bulletEnd() {
+        mContext = null;
+        mBitmapBullet.recycle();
+    }
+
+    /**
+     * Y座標の取得
+     */
+    public float getY() {
+        return mY;
+    }
+
 }
