@@ -2,14 +2,19 @@ package jp.study.ndktest;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
+
+import jp.study.ndktest.SceneCtrl.GamePlayCtrl;
+import jp.study.ndktest.SceneCtrl.TitleCtrl;
 
 /**
  * Created by ishitaku on 2016/09/14.
  */
 public class MainGame {
     //コンテキスト
-    Context mContext = null;
-
+    private Context mContext = null;
+    //ペイント
+    private Paint mPaint = null;
     //ゲーム状態の列挙型
     private enum GameState {
         TITLE,
@@ -25,10 +30,11 @@ public class MainGame {
     /**
      * コンストラクタ
      */
-    MainGame(Context context) {
+    public MainGame(Context context) {
         //mGameState = GameState.TITLE;
         mGameState = GameState.GAMEPLAY;
         mContext = context;
+        mPaint = new Paint();
     }
 
     public void gameUpdate(int inputx, int inputy, boolean ontouch) {
@@ -54,12 +60,12 @@ public class MainGame {
         switch (mGameState) {
             case TITLE:
                 if(mTitleCtrl != null) {
-                    mTitleCtrl.titleDraw(canvas);
+                    mTitleCtrl.titleDraw(canvas, mPaint);
                 }
                 break;
             case GAMEPLAY:
                 if (mGamePlayCtrl != null){
-                    mGamePlayCtrl.gamePlayDraw(canvas);
+                    mGamePlayCtrl.gamePlayDraw(canvas, mPaint);
                 }
                 break;
             default:

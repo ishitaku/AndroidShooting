@@ -74,8 +74,8 @@ public class Player {
     /**
      * 描画
      */
-    public void playerDraw(Canvas canvas) {
-        canvas.drawBitmap(mBitmapPlayer, mX - mWidth/2, mY - mHeight/2, new Paint());
+    public void playerDraw(Canvas canvas, Paint paint) {
+        canvas.drawBitmap(mBitmapPlayer, mX - mWidth/2, mY - mHeight/2, paint);
     }
 
     /**

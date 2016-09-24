@@ -2,6 +2,7 @@ package jp.study.ndktest;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 
 /**
  * Created by ishitaku on 2016/09/15.
@@ -18,7 +19,7 @@ public class StageManager {
     /**
      * コンストラクタ
      */
-    StageManager(Context context) {
+    public StageManager(Context context) {
         mContext = context;
         stageManagerInit();
     }
@@ -41,7 +42,7 @@ public class StageManager {
     /**
      * 描画処理
      */
-    public void stageManagerDraw(Canvas canvas) {
-        mStage.stageDraw(canvas);
+    public void stageManagerDraw(Canvas canvas, Paint paint) {
+        mStage.stageDraw(canvas, paint);
     }
 }
