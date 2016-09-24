@@ -52,6 +52,7 @@ public class Stage {
      * 更新
      */
     public void stageUpdate(int inputx, int inputy, boolean ontouch) {
+        //背景の更新
         updateBackground();
 
         mPlayer.playerUpdate(inputx, inputy, ontouch);
