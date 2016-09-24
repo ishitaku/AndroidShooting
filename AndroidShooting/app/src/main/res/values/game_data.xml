@@ -6,4 +6,8 @@
     <integer name="player_height">128</integer>
     <integer name="bullet_width">64</integer>
     <integer name="bullet_height">32</integer>
+    <integer name="enemy03_width">48</integer>
+    <integer name="enemy03_height">48</integer>
+    <integer name="enemy_bullet_width">16</integer>
+    <integer name="enemy_bullet_height">16</integer>
 </resources>

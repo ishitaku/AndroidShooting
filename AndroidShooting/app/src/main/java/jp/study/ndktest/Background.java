@@ -61,8 +61,8 @@ public class Background {
     /**
      * 描画
      */
-    public void backgroundDraw(Canvas canvas) {
-        canvas.drawBitmap(mBitmapBackground, mX, mY, new Paint());
+    public void backgroundDraw(Canvas canvas, Paint paint) {
+        canvas.drawBitmap(mBitmapBackground, mX, mY, paint);
     }
 
     /**

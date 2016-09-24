@@ -2,10 +2,13 @@ package jp.study.ndktest;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.util.Log;
+import android.graphics.Paint;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.study.ndktest.Enemy.Enemy03;
+import jp.study.ndktest.Enemy.EnemyManager;
 
 /**
  * Created by ishitaku on 2016/09/15.
@@ -20,10 +23,13 @@ public class Stage {
     private int VIEW_HEIGHT = 0;
 
     //弾
-    private List<Bullet> mBulletList;
+    private List<PlayerBullet> mPlayerBulletList;
     private final int BULLET_DUR = 8;  //発射間隔
     private int mBulletDurCount = 0;    //発射間隔カウント
     private boolean mBulletFlg = true;  //発射フラグ
+
+    //敵の管理
+    private EnemyManager mEnemyManager = null;
 
     /**
      * コンストラクタ
@@ -45,7 +51,8 @@ public class Stage {
         mBackgrounds[0] = new Background(mContext, R.drawable.background_01, 0, 0);
         mBackgrounds[1] = new Background(mContext, R.drawable.background_02, 0, -(float)VIEW_HEIGHT);
         //Bulletリスト
-        mBulletList = new ArrayList<>();
+        mPlayerBulletList = new ArrayList<>();
+        mEnemyManager = new EnemyManager(mContext);
     }
 
     /**
@@ -58,9 +65,9 @@ public class Stage {
         mPlayer.playerUpdate(inputx, inputy, ontouch);
 
         //弾
-        for(int i = 0; i < mBulletList.size(); i++) {
-            mBulletList.get(i).bulletUpdate();
-            if(mBulletList.get(i).getY() < 0) {
+        for(int i = 0; i < mPlayerBulletList.size(); i++) {
+            mPlayerBulletList.get(i).bulletUpdate();
+            if(mPlayerBulletList.get(i).getY() < 0) {
 
             }
         }
@@ -69,7 +76,7 @@ public class Stage {
         if(ontouch && mBulletFlg) {
             mBulletFlg = false;
             mBulletDurCount = 0;
-            mBulletList.add(new Bullet(mContext, mPlayer.getX(), mPlayer.getY()));
+            mPlayerBulletList.add(new PlayerBullet(mContext, mPlayer.getX(), mPlayer.getY()));
         }
 
         mBulletDurCount++;
@@ -80,31 +87,33 @@ public class Stage {
         }
 
         //弾の削除
-        if(mBulletList.size() > 0) {
-            for(int i = mBulletList.size() - 1; i >= 0; i--) {
-                if(mBulletList.get(i).getY() < 0) {
-                    mBulletList.get(i).bulletEnd();
-                    mBulletList.remove(i);
+        if(mPlayerBulletList.size() > 0) {
+            for(int i = mPlayerBulletList.size() - 1; i >= 0; i--) {
+                if(mPlayerBulletList.get(i).getY() < 0) {
+                    mPlayerBulletList.get(i).bulletEnd();
+                    mPlayerBulletList.remove(i);
                 }
             }
         }
+
+        mEnemyManager.enemyManagerUpdate();
     }
 
     /**
      * 描画
      */
-    public void stageDraw(Canvas canvas) {
+    public void stageDraw(Canvas canvas, Paint paint) {
         //背景
         for(int i = 0; i < mBackgrounds.length; i++) {
-            mBackgrounds[i].backgroundDraw(canvas);
+            mBackgrounds[i].backgroundDraw(canvas, paint);
         }
         //弾
-        for(int i = 0; i < mBulletList.size(); i++) {
-            mBulletList.get(i).bulletDraw(canvas);
+        for(int i = 0; i < mPlayerBulletList.size(); i++) {
+            mPlayerBulletList.get(i).bulletDraw(canvas, paint);
         }
         //プレイヤー
-        mPlayer.playerDraw(canvas);
-
+        mPlayer.playerDraw(canvas, paint);
+        mEnemyManager.enemyManagerDraw(canvas, paint);
     }
 
     /**
